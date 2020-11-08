@@ -22,8 +22,12 @@ class Reddit(object):
         print("Successfully logged into reddit as user %s" % self.reddit.user.me())
 
     def check_subreddit(self, subreddit_name, max_time = None):
-        subreddit = self.reddit.subreddit(subreddit_name)
-        posts = subreddit.new(limit=200)
+        try:
+            subreddit = self.reddit.subreddit(subreddit_name)
+            posts = subreddit.new(limit=200)
+        except:
+            print("Failed to fetch posts.")
+            return []
         filtered_posts = self._parse_posts(posts)
         return filtered_posts
     

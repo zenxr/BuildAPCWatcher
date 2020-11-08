@@ -12,8 +12,8 @@ class Notifier(object):
 
     def alert(self, post):
         print(post['title'])
-        #self._alert_emails(post)
-        #self._alert_smses(post)
+        self._alert_emails(post)
+        self._alert_smses(post)
 
     def _alert_emails(self, post):
         body = self._build_email_msg_body(post)
