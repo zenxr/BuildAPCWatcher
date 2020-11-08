@@ -21,7 +21,7 @@ class BuildAPcWatch(object):
         s.run()
 
     def _update(self, s):
-        print("Updating...")
+        print("%s : Updating..." % str(datetime.now()))
         interested_posts = self.reddit.check_subreddit('buildapcsales')
         new_posts = self._identify_new_posts(interested_posts)
         if new_posts:
