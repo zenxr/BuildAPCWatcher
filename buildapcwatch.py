@@ -52,9 +52,11 @@ class BuildAPcWatch(object):
             max_age = datetime.utcnow() - timedelta(hours = self.max_age_hours)
             if datetime.fromtimestamp(post['created']) > max_age:
                 return
-        if not any(keyword in post['title'] for keyword in config.KEYWORDS):
-            return
-        return post
+        matches = [keyword for keyword in config.KEYWORDS.keys() if keyword.lower() in post['title'].lower()]
+        for match in matches:
+            if config.KEYWORDS[match].lower() in post['title'].lower():
+                return post
 
 if __name__ == '__main__':
     BuildAPcWatch(max_age_hours=1).watch()
+
